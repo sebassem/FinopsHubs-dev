@@ -57,6 +57,7 @@ var resourceTags = union(tags, {
     'cm-resource-parent': '${resourceGroup().id}/providers/Microsoft.Cloud/hubs/${hubName}'
     'ftk-version': finOpsToolkitVersion
     'ftk-tool': 'FinOps hubs'
+    })
 
 // Generate globally unique Data Factory name: 3-63 chars; letters, numbers, non-repeating dashes
 var uniqueSuffix = uniqueString(hubName, resourceGroup().id)
