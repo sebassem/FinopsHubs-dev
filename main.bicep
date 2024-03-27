@@ -38,9 +38,6 @@ param exportContainer string = 'exports'
 @description('The name of the container used for normalized data ingestion.')
 param ingestionContainer string = 'ingestion'
 
-@description('Optional. To use Private Endpoints, add target subnet resource Id.')
-param subnetResourceId string = ''
-
 //==============================================================================
 // Resources
 //==============================================================================

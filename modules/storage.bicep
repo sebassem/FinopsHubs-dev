@@ -83,6 +83,10 @@ module storageAccount 'br/public:avm/res/storage/storage-account:0.8.0' = {
         principalType: 'ServicePrincipal'
       }
     ]
+    networkAcls: {
+      bypass: 'AzureServices'
+      defaultAction: 'Allow'
+    }
   }
 }
 
