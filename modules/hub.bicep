@@ -53,6 +53,7 @@ var storageAccountSuffix = uniqueSuffix
 var storageAccountName = '${take(safeHubName, 24 - length(storageAccountSuffix))}${storageAccountSuffix}'
 
 // Add cm-resource-parent to group resources in Cost Management
+var finOpsToolkitVersion = loadTextContent('version.txt')
 var resourceTags = union(tags, {
     'cm-resource-parent': '${resourceGroup().id}/providers/Microsoft.Cloud/hubs/${hubName}'
     'ftk-version': finOpsToolkitVersion
