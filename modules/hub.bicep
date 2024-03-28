@@ -21,6 +21,7 @@ param storageSku string = 'Premium_LRS'
 @description('Optional. Tags to apply to all resources. We will also add the cm-resource-parent tag for improved cost roll-ups in Cost Management.')
 param tags object = {}
 
+
 @description('Optional. Tags to apply to resources based on their resource type. Resource type specific tags will be merged with tags for all resources.')
 param tagsByResource object = {}
 
@@ -52,9 +53,12 @@ var storageAccountSuffix = uniqueSuffix
 var storageAccountName = '${take(safeHubName, 24 - length(storageAccountSuffix))}${storageAccountSuffix}'
 
 // Add cm-resource-parent to group resources in Cost Management
+var finOpsToolkitVersion = loadTextContent('version.txt')
 var resourceTags = union(tags, {
     'cm-resource-parent': '${resourceGroup().id}/providers/Microsoft.Cloud/hubs/${hubName}'
-  })
+    'ftk-version': finOpsToolkitVersion
+    'ftk-tool': 'FinOps hubs'
+    })
 
 // Generate globally unique Data Factory name: 3-63 chars; letters, numbers, non-repeating dashes
 var uniqueSuffix = uniqueString(hubName, resourceGroup().id)
@@ -64,7 +68,6 @@ var dataFactoryName = replace('${take(dataFactoryPrefix, 63 - length(dataFactory
 
 // The last segment of the telemetryId is used to identify this module
 var telemetryId = '00f120b5-2007-6120-0000-40b000000000'
-var finOpsToolkitVersion = loadTextContent('version.txt')
 
 //==============================================================================
 // Resources
